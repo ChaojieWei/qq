@@ -26,6 +26,7 @@ from utils import load_data, saveVar, loadVar, AdjustVariable, EarlyStopping, fl
 
 parser = argparse.ArgumentParser(description='CNN using Theano, Lasagne and NoLearn.')
 parser.add_argument('--load_network',help='Load a previously saved network',action='store_true')
+parser.add_argument('--load_best_network',help='Load the best network for the selected dataset',action='store_true')
 parser.add_argument('--print_network',help='Print the loaded network',action='store_true')
 parser.add_argument('--short_print_network',help='Print the main parameters of the network',action='store_true')
 parser.add_argument('--test_seed_initialization',help='Test for the correct seed initialization',action='store_true')
@@ -56,7 +57,7 @@ args = parser.parse_args()
 NETWORK_TYPE = args.network_type if args.network_type else 'CONVNET'
 LOAD_NETWORK = bool(args.load_network) if args.load_network else False
 PRINT_NETWORK = bool(args.print_network) if args.print_network else False
-LOAD_BEST_NETWORK = True
+LOAD_BEST_NETWORK = bool(args.load_best_network) if args.load_best_network else False
 SHORT_PRINT_NETWORK = bool(args.short_print_network) if args.short_print_network else False
 TEST_SEED_INITIALIZATION = bool(args.test_seed_initialization) if args.test_seed_initialization else False
 NUM_EPOCHS = int(args.num_epochs) if args.num_epochs else 5000
@@ -68,8 +69,6 @@ MOMENTUM = float(args.momentum) if args.momentum else 0.7
 NUM_CLASSES = int(args.num_classes) if args.num_classes else 2
 BATCH_SIZE = int(args.batch_size) if args.batch_size else 1
 BATCH_SIZE_TEST = BATCH_SIZE
-
-NORMALIZE_Y = bool(args.normalize_y) if args.normalize_y else False
 
 LAMDA1 = float(args.lamda1) if args.lamda1 else 1.0
 LAMDA2 = float(args.lamda2) if args.lamda2 else 0
@@ -89,7 +88,7 @@ LASAGNE_SEED = int(args.lasagne_seed) if args.lasagne_seed else np.random.randin
 HYPERPARAM_OPT = args.hyperparameter_optimization if args.hyperparameter_optimization else 'NONE'
 # Environment variable
 DATASET = args.dataset if args.dataset else 'extFTIR'
-NETWORK_NAME = ('best_' if HYPERPARAM_OPT=='RANDOM' or LOAD_BEST_NETWORK else '') + NETWORK_TYPE
+NETWORK_NAME = ('best_' if LOAD_BEST_NETWORK else 'last_') + NETWORK_TYPE
 NAME_FILTERS = 'components_' + NETWORK_NAME
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + '/'
 
@@ -114,10 +113,7 @@ if BATCH_SIZE<0:
   BATCH_SIZE=y.shape[0]
   BATCH_SIZE_TEST=BATCH_SIZE
 
-PLOT_DIR = ROOT_DIR + 'phd/python/convnet1d/plots/' + DATASET 
-if not os.path.exists(PLOT_DIR):
-    os.makedirs(PLOT_DIR)
-SAVED_VAR_DIR = ROOT_DIR + 'phd/python/convnet1d/saved_vars/' + DATASET  + '/'
+SAVED_VAR_DIR = ROOT_DIR + 'saved_networks/' + DATASET  + '/'
 if not os.path.exists(SAVED_VAR_DIR):
     os.makedirs(SAVED_VAR_DIR)
 
@@ -168,7 +164,7 @@ else:
 	  conv1d_num_filters=NUM_KERNEL,
 	  conv1d_filter_size= KERNEL_SIZE,
 	  conv1d_stride=STRIDE,
-	  conv1d_pad='same',
+	  conv1d_pad='valid',
 	  conv1d_nonlinearity=lasagne.nonlinearities.rectify,
 	  conv1d_W=lasagne.init.GlorotUniform(gain=np.sqrt(2)),
 	  conv1d_b=lasagne.init.Constant(0.),
