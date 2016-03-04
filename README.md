@@ -17,6 +17,8 @@ To deactivate the environment simply run
     deactivate
 
 # Install required Python packages
+For running this script you need to have an updated version of Pip
+installed (See https://pip.pypa.io/en/stable/ for how to install it).
 ### Linux / Mac OS X systems
 In order to use my code you have just to run the setup.sh 
 with the command from:
@@ -28,8 +30,6 @@ with the command from:
     Not yet available
 
 # Running the script
-For running this script you need to have an updated version of Pip
-installed (See https://pip.pypa.io/en/stable/ for how to install it).
 If nothing went wrong you can already run the main script file
 that implements a Convolutional Neural Network and it is already
 set up for loading the datasets considered in the paper.
