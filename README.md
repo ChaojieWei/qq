@@ -26,8 +26,13 @@ with the command from:
     bash setup.sh
 
 ### Windows sistems
-
-    Not yet available
+Here https://sites.google.com/site/pydatalog/python/pip-for-windows 
+you will find a good starting point for using pip and virtualenv on 
+Windows once you configure Python for Windows properly.
+There is a non tested setup.bat similar to the Linux one. Take it
+as a descriptive file for the steps to follow to install
+the required dependencies and source files.
+    
 
 # Running the script
 If nothing went wrong you can already run the main script file
