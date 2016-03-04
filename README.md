@@ -17,13 +17,13 @@ available on the virtualenv site.
     deactivate
 
 # Install required Python packages
-For running this script you need to have an updated version of Pip
+>For running this script you need to have an updated version of Pip
 installed (See https://pip.pypa.io/en/stable/ for how to install it).
 
 ### Linux / Mac OS X systems
-In order to use my code you have just to run the setup.sh 
+>In order to use my code you have just to run the setup.sh 
 with the command from:
- 
+
     bash setup.sh
 
 ### Windows sistems
@@ -43,30 +43,30 @@ set up for loading the datasets considered in the paper.
 
     python cnn/cnn.py
     
-To select the dataset you can use the option:
+>To select the dataset you can use the option:
 
     --dataset=DATASET
-where possible values for DATASET are
+>where possible values for DATASET are
 
     [extFTIR,extNIR,extRaman,TABLET_NIR,TABLET_Raman,
     extWINE,OIL,COFFEE,extSTRAWBERRY]
               
-To load the best trained network you have to use in addition
+>To load the best trained network you have to use in addition
 the option:
-    
+
     --load_dataset
 
-If you also want to see the value of the main parameters of the network
+>If you also want to see the value of the main parameters of the network
 you have to use also
 
     --short_print_network
 
-Instead if you want to train a new network you have to add only the 
+>Instead if you want to train a new network you have to add only the 
 option:
 
     --hyperparameter_optimization=SEARCH_METHOD
     
-where the possible search methods are
+>where the possible search methods are
 
     [RANDOM,EXHAUSTIVE]
     
