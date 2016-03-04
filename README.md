@@ -1,6 +1,6 @@
-==================== Use Virtualenv =================================
-Before installing python dependencies I advise you to use virtualenv 
-(https://virtualenv.readthedocs.org/en/latest/) to avoid to mess up 
+# ==================== Use Virtualenv =================================
+Before installing python dependencies I advise you to use  
+![Alt text](https://virtualenv.readthedocs.org/en/latest/ "virtualenv") to avoid to mess up 
 with your sistem libraries.
 if you don't have virtualenv installed follow the installation guide
 available on the virtualenv site
@@ -22,7 +22,7 @@ with the command from:
     bash setup.sh
 
 For running this script you need to have an updated version of Pip
-installed (See https://pip.pypa.io/en/stable/ for how to install it).
+installed ![Alt text](https://pip.pypa.io/en/stable/ "Pip").
 If nothing went wrong you can already run the main script file
 that implements a Convolutional Neural Network and it is already
 set up for loading the datasets considered in the paper.
