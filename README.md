@@ -6,6 +6,7 @@ datasets or load the best network configuration for each dataset.
 >TODO allow the user to provide extra datasets
 
 # How to setup your system
+>First of all clone the repository into a directory of your choice.
 >To run the cnn.py Python script inside the cnn directory you need
 to follow the simple steps below.
 
