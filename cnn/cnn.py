@@ -72,9 +72,9 @@ BATCH_SIZE_TEST = BATCH_SIZE
 
 LAMDA1 = float(args.lamda1) if args.lamda1 else 1.0
 LAMDA2 = float(args.lamda2) if args.lamda2 else 0
-EARLYSTOP=bool(args.earlystop) if args.earlystop else False
-EARLYSTOP_ITER = int(args.earlystop_iteration) if args.earlystop_iteration else 100
 
+EARLYSTOP_ITER = int(args.earlystop_iteration) if args.earlystop_iteration else 100
+EARLYSTOP=bool(args.earlystop) if args.earlystop or args.earlystop_iteration else False
 # Parameters for samples' analysis
 ONLY_VALIDATION = bool(args.only_validation) if args.only_validation else False
 SEED = int(args.dataset_seed) if args.dataset_seed else -1
@@ -180,7 +180,7 @@ else:
 	  update=nesterov_momentum,
 	  update_momentum=theano.shared(float32(MOMENTUM)),
 
-	  train_split=TrainSplit(eval_size=0.0),
+	  train_split=TrainSplit(eval_size=0.2 if EARLYSTOP and EARLYSTOP_ITER>0 else 0.0),
 	  update_learning_rate=theano.shared(float32(LEARNING_RATE)),
 	  max_epochs=NUM_EPOCHS,
 	  batch_iterator_train=BatchIterator(batch_size=BATCH_SIZE),
