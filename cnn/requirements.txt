@@ -2,8 +2,8 @@ argcomplete==1.0.0
 argparse==1.2.1
 cycler==0.10.0
 joblib==0.9.4
-matplotlib==1.5.1
 Lasagne==0.1
+matplotlib==1.5.1
 numpy==1.10.4
 pyparsing==2.0.3
 python-dateutil==2.4.2

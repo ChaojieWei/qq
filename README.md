@@ -10,6 +10,19 @@ datasets or load the best network configuration for each dataset.
 >To run the cnn.py Python script inside the cnn directory you need
 to follow the simple steps below.
 
+# Required packages
+>You need your machine to have working C/C++ and Fortran compilers.
+Moreover you will need:
+
+    gnuplot, openblas, python-dev
+    
+>properly installed and working on your machine
+>If your system is Ubuntu/Debian based you can easily install all of them
+with this command
+
+    sudo apt-get install build-essential gnuplot gfortran libfreetype6-dev libopenblas-dev python-dev
+
+
 # Use Virtualenv
 >Before installing python dependencies I advise you to use virtualenv 
 (https://virtualenv.readthedocs.org/en/latest/) to avoid to mess up 
