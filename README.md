@@ -1,3 +1,14 @@
+# Convolutional Neural network (CNN) for vibrational spectroscopy data
+>This repository contains a Python implementantion of a CNN using the
+Nolearn/Lasagne/Theano libraries. 
+>You can re-run the experiments on the provided vibrational spectroscopy 
+datasets or load the best network configuration for each dataset.
+>TODO allow the user to provide extra datasets
+
+# How to setup your system
+>To run the cnn.py Python script inside the cnn directory you need
+to follow the simple steps below.
+
 # Use Virtualenv
 >Before installing python dependencies I advise you to use virtualenv 
 (https://virtualenv.readthedocs.org/en/latest/) to avoid to mess up 
