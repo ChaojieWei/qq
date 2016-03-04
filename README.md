@@ -22,6 +22,13 @@ In order to use my code you have just to run the setup.sh
 with the command from:
     
     bash setup.sh
+### Windows
+
+Not yet available
+
+### Mac Os X
+
+Not yet available
 
 # Running the script
 For running this script you need to have an updated version of Pip
