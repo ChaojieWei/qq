@@ -24,11 +24,11 @@ with the command from:
     bash setup.sh
 ### Windows
 
-Not yet available
+    Not yet available
 
 ### Mac Os X
 
-Not yet available
+    Not yet available
 
 # Running the script
 For running this script you need to have an updated version of Pip
