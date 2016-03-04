@@ -1,0 +1,13 @@
+joblib
+matplotlib
+scikit-learn
+tabulate
+Lasagne
+
+[docs]
+Sphinx
+
+[testing]
+mock
+pytest
+pytest-cov
