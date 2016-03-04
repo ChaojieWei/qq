@@ -17,16 +17,12 @@ To deactivate the environment simply run
     deactivate
 
 # Install required Python packages
-### Linux distros
+### Linux / Mac Os X systems
 In order to use my code you have just to run the setup.sh 
 with the command from:
     
     bash setup.sh
-### Windows
-
-    Not yet available
-
-### Mac Os X
+### Windows sistems
 
     Not yet available
 
