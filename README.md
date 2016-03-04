@@ -68,11 +68,16 @@ the option:
 
     --load_best_network
 
->To load the last trained network with grid search you have to use in addition
+>Instead to load the last trained network with grid search you have to use 
 the option:
 
     --load_network
 
+>Networks trained without grid search need to be renamed adding the prefix
+
+    last_
+
+>and then use the option --load_network.
 >If you also want to see the value of the main parameters of the network
 you have to use also
 
