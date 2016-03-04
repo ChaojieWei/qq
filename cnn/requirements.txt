@@ -1,16 +1,15 @@
--e git+https://github.com/Lasagne/Lasagne.git@8f4f9b2#egg=Lasagne==0.2.git
--e git+https://github.com/Theano/Theano.git@54186290#egg=Theano==0.8.git
--e git+https://github.com/dnouri/nolearn.git@master#egg=nolearn==0.6a0.git
-
 argcomplete==1.0.0
 argparse==1.2.1
-matplotlib==1.4.3
-
-numpy==1.9.2
+cycler==0.10.0
+joblib==0.9.4
+matplotlib==1.5.1
+Lasagne==0.1
+numpy==1.10.4
 pyparsing==2.0.3
 python-dateutil==2.4.2
 pytz==2015.4
 scikit-learn==0.15.2
-scipy==0.16.0
 six==1.9.0
 tabulate==0.7.5
+Theano==0.7.0
+

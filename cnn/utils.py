@@ -15,6 +15,9 @@ import lasagne
 from lasagne.objectives import aggregate
 from lasagne.layers import get_output, get_all_layers, get_all_param_values
 import numpy
+from sklearn import preprocessing
+
+from nolearn.lasagne import NeuralNet
 
 from scipy.io import savemat, loadmat
 
@@ -99,7 +102,7 @@ def float32(k):
     """
     return numpy.cast['float32'](k)
 def l2_paired(x):
-    """Applies a modified L2 norm to a 1D vector that takes 
+  """Applies a modified L2 norm to a 1D vector that takes 
     into account the locality of the information
     Parameters
     ----------
@@ -109,7 +112,7 @@ def l2_paired(x):
     -------
     theano tensor
         The output tensor
-    """
+  """
   shapes=x.shape.eval()
   mask=numpy.eye(shapes[-1])
   mask[-1,-1]=0
@@ -118,8 +121,8 @@ def l2_paired(x):
 def my_objective(layers,
                  loss_function,
                  target,
-                 lambda1,
-                 lambda2,
+                 lamda1,
+                 lamda2,
                  aggregate=aggregate,
                  deterministic=False,
                  get_output_kw=None):
@@ -131,9 +134,9 @@ def my_objective(layers,
         All the layers of the neural network
     loss_function : function
         The loss function to use
-    lambda1 : float
+    lamda1 : float
         Constant for the L2 regularizaion term
-    lambda2 : float
+    lamda2 : float
         Constant for the paired L2 regularizaion term
     aggregate : function
         Lasagne function to aggregate an element
@@ -158,10 +161,10 @@ def my_objective(layers,
       for i,h_layer in enumerate(hidden_layers):
 	zeros = numpy.zeros(i).astype(int).astype(str)                
         denom = '10' +  ''.join(zeros) 
-        losses = losses + i/float(denom) * (lambda1*regularize_layer_params(h_layer, l2) + lambda2*regularize_layer_params(h_layer, l2_paired))
+        losses = losses + i/float(denom) * (lamda1*regularize_layer_params(h_layer, l2) + lamda2*regularize_layer_params(h_layer, l2_paired))
     return aggregate(losses)
 class EarlyStopping(object):
-     """Class to apply early stopping during the learning phase"""
+    """Class to apply early stopping during the learning phase"""
     def __init__(self, patience=100):
         """Init function for class EarlyStopping
         Parameters
@@ -228,7 +231,7 @@ class AdjustVariable(object):
         epoch = train_history[-1]['epoch']
         new_value = float32(self.ls[epoch - 1])
         getattr(nn, self.name).set_value(new_value)
-def saveVar(var,name,path='./saved_vars/'):
+def saveVar(var,name,path='./saved_networks/'):
   """Save a python variable into a .pickle file
   Parameters
   ----------
@@ -251,7 +254,7 @@ def saveVar(var,name,path='./saved_vars/'):
     print('Writing variable:',name,'in path:',path)
   except IOError:
     print('Error writing variable:',name,'in path:',path)
-def loadVar(filename,path='./saved_vars/'):
+def loadVar(filename,path='./saved_networks/'):
   """Load a python variable from a .pickle file
   Parameters
   ----------

@@ -10,7 +10,7 @@ from lasagne import layers
 from lasagne.updates import nesterov_momentum
 from lasagne.objectives import categorical_crossentropy
 from nolearn.lasagne import BatchIterator, TrainSplit
-from lib.nolearn.base import NeuralNet
+from nolearn.lasagne import NeuralNet
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from lib.sklearn import grid_search
 from scipy.stats import randint as sp_randint
@@ -96,12 +96,10 @@ OUTPUT_DIR = '.'
 
 MAX_CPUS = int(args.max_cpus) if args.max_cpus else multiprocessing.cpu_count()
 
-# Plot styles
-linestyles = ['_', '-', '--', ':']
-
-colors = ('b', 'g', 'r', 'c', 'm', 'y', 'k')
+if LOAD_BEST_NETWORK:
+    LOAD_NETWORK=True
 # Loading dataset
-X, y, X_test,y_test = load_data(ROOT_DIR,DATASET,only_validation=ONLY_VALIDATION,scale_dataset=False ,shuffle=SEED)
+X, y, X_test,y_test = load_data(ROOT_DIR,DATASET,only_validation=ONLY_VALIDATION,scale_dataset=(not HYPERPARAM_OPT=='RANDOM' and not HYPERPARAM_OPT=='EXHAUSTIVE') ,shuffle=SEED)
 NO_TEST_SET=(X_test.shape[0]==0)
 # Num of classes
 NUM_CLASSES=len(np.unique(y)) 
@@ -130,11 +128,11 @@ print('Train-valid set size:',X.shape[0],'Test set size:',X_test.shape[0],'#Clas
 
 # Load a saved network
 if LOAD_NETWORK:
-  best_net = loadVar(NETWORK_NAME + (str(USE_PROPERTY) if USE_PROPERTY>0 else '') + ('_mod' if MODIFY_DATASET else ''),SAVED_VAR_DIR)
+  best_net = loadVar(NETWORK_NAME ,SAVED_VAR_DIR)
   if PRINT_NETWORK:
     printNet(best_net)
   elif SHORT_PRINT_NETWORK:
-    params_=getCNNParams(NETWORK_NAME + (str(USE_PROPERTY) if USE_PROPERTY>0 else '') + ('_mod' if MODIFY_DATASET else ''),SAVED_VAR_DIR)
+    params_=getCNNParams(NETWORK_NAME,SAVED_VAR_DIR)
     for key,value in params_.iteritems():
       try:
 	print('%s\t=>\t%f')%(key.upper(),value)
@@ -300,7 +298,7 @@ else:
   if not LOAD_NETWORK:
     best_net = net1.fit(X.reshape((-1, 1, X.shape[1])), y.astype(np.uint8))
     saveVar(best_net,NETWORK_TYPE,SAVED_VAR_DIR)
-    preds = best_net.predict(X.reshape((-1, 1, X.shape[1])))
+  preds = best_net.predict(X.reshape((-1, 1, X.shape[1])))
   print(classification_report(y.astype(np.uint8), preds))
   cm = confusion_matrix(y.astype(np.uint8), preds)
   print(cm)
