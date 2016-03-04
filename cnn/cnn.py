@@ -74,7 +74,10 @@ LAMDA1 = float(args.lamda1) if args.lamda1 else 1.0
 LAMDA2 = float(args.lamda2) if args.lamda2 else 0
 
 EARLYSTOP_ITER = int(args.earlystop_iteration) if args.earlystop_iteration else 100
-EARLYSTOP=bool(args.earlystop) if args.earlystop or args.earlystop_iteration else False
+EARLYSTOP=bool(args.earlystop) if args.earlystop else False
+if args.earlystop_iteration:
+    EARLYSTOP=True
+    
 # Parameters for samples' analysis
 ONLY_VALIDATION = bool(args.only_validation) if args.only_validation else False
 SEED = int(args.dataset_seed) if args.dataset_seed else -1

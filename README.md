@@ -66,7 +66,12 @@ set up for loading the datasets considered in the paper.
 >To load the best trained network you have to use in addition
 the option:
 
-    --load_dataset
+    --load_best_network
+
+>To load the last trained network with grid search you have to use in addition
+the option:
+
+    --load_network
 
 >If you also want to see the value of the main parameters of the network
 you have to use also
