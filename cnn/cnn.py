@@ -283,7 +283,7 @@ elif HYPERPARAM_OPT=='EXHAUSTIVE':
 				parameters,
 				cv=N_FOLDS,
 				n_jobs=int(MAX_CPUS),verbose=10)
-
+log_file=open(SAVED_VAR_DIR + NETWORK_NAME + '.log','w')
 if HYPERPARAM_OPT=='RANDOM' or HYPERPARAM_OPT=='EXHAUSTIVE':
     clf.fit(X.reshape((-1, 1, X.shape[1])), y.astype(np.uint8))
     print('Train Accuracy:\t %.4f with parameters: \n')%(clf.best_score_)
@@ -293,6 +293,7 @@ if HYPERPARAM_OPT=='RANDOM' or HYPERPARAM_OPT=='EXHAUSTIVE':
     saveVar(best_net,NETWORK_NAME ,SAVED_VAR_DIR)
     saveVar(clf.best_params_,NETWORK_NAME + '_params' ,SAVED_VAR_DIR)
     saveVar(clf.grid_scores_,NETWORK_NAME + '_cvscores' ,SAVED_VAR_DIR)
+    log_file.write('Accuracy train set: ' + str(clf.best_score_) + '\n')
 
 else:
   if not LOAD_NETWORK:
@@ -303,16 +304,16 @@ else:
   cm = confusion_matrix(y.astype(np.uint8), preds)
   print(cm)
   print("Accuracy:\t%.4f") % ( accuracy_score(y.astype(np.uint8), preds))
-
+  log_file.write('Accuracy train set: ' + str(accuracy_score(y.astype(np.uint8), preds)) + '\n')
   if not NO_TEST_SET:
     preds = best_net.predict(X_test.reshape((-1, 1, X_test.shape[1])))
     print(classification_report(y_test.astype(np.uint8), preds))
     print("Accuracy test:\t%.4f") % (accuracy_score(y_test.astype(np.uint8), preds))
-    log_file=open(SAVED_VAR_DIR + NETWORK_NAME + '.log','a')
-    log_file.write('Accuracy test: ' + str(accuracy_score(y_test.astype(np.uint8), preds)))
-    log_file.close()
+    
+    log_file.write('Accuracy test set: ' + str(accuracy_score(y_test.astype(np.uint8), preds)) + '\n')
     
   # Visualize the confusion matrix in case of a test set
     preds = best_net.predict(X_test.reshape((-1, 1, X_test.shape[1])))
     cm = confusion_matrix(y_test.astype(np.uint8), preds)
     print(cm)
+log_file.close()
