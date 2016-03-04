@@ -21,7 +21,7 @@ available on the virtualenv site.
 
 >And then to use the virtual environment
 
-    source venv/bi/activate
+    source venv/bin/activate
 
 >To deactivate the environment simply run
 
