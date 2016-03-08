@@ -17,6 +17,10 @@ echo "Install required packages from online repositories and from local director
 pip install ${XOPTS} -r cnn/requirements.txt 
 pip install ${XOPTS} -e cnn/src/nolearn
 
+# Check/install scipy again (required for some environments)
+echo "First install scipy (required by scikit-learn)"
+pip install ${XOPTS} scipy==0.16.0
+
 # Change to original directory
 echo "DONE. Change back to the original directory"
 cd -
