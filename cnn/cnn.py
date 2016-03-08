@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env/python
 # System libraries
 import sys,os
 import multiprocessing
-# Numpy, Theano, Lasagne, Nolearn, Sklearn, Matplotlib libraries
+# Numpy, Theano, Lasagne, Nolearn, Sklearn, Scipy
 import numpy as np
 import theano
 import lasagne
@@ -15,8 +15,6 @@ from sklearn.metrics import classification_report, accuracy_score, confusion_mat
 from lib.sklearn import grid_search
 from scipy.stats import randint as sp_randint
 from scipy.stats import uniform as sp_uniform
-
-# Find out if the script is running in a Graphical session or not
 
 # Import argument parsing library
 import argparse, argcomplete
