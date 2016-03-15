@@ -263,7 +263,7 @@ if HYPERPARAM_OPT=='RANDOM':
 elif HYPERPARAM_OPT=='EXHAUSTIVE':
   if NETWORK_TYPE == 'CONVNET':
     parameters={
-	    'conv1d_filter_size': [3,5,11,31,41,53,61,71,83,91], 
+	    'conv1d_filter_size': [3,5,11,31,41,], 
 	    'update_momentum' : [0.1,0.3,0.5,0.7,0.9],
 	    'conv1d_num_filters' : [2,4],
 	    'conv1d_stride' : range(1,40),
