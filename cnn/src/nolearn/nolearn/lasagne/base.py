@@ -549,8 +549,6 @@ class NeuralNet(BaseEstimator):
 
     def get_all_params(self, **kwargs):
         layers = self.get_all_layers()
-        new_layers = [layers[0]] + [layers[-1]] 
-        params = sum([l.get_params(**kwargs) for l in layers], [])
         params = sum([l.get_params(**kwargs) for l in layers], [])
         return unique(params)
 
