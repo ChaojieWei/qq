@@ -229,14 +229,20 @@ class NeuralNet(BaseEstimator):
             # line not to be printed
             self.on_epoch_finished.append(PrintLog())
             self.on_training_started.append(PrintLayerInfo())
-
+        for key, value in kwargs.iteritems():
+            if 'stride' in key:
+                if value>kwargs[key.split('_',1)[0] + '_filter_size']:
+                    warn("The '" + key + "' value is > then the filter_size. "
+                 "New value for the stride = filter_size")
+                    kwargs[key]=kwargs[key.split('_',1)[0] + '_filter_size']
+            else: 
+                continue
         for key in kwargs.keys():
             assert not hasattr(self, key)
         vars(self).update(kwargs)
         self._kwarg_keys = list(kwargs.keys())
 
         self.train_history_ = []
-
         if 'batch_iterator' in kwargs:  # BBB
             raise ValueError(
                 "The 'batch_iterator' argument has been replaced. "
@@ -345,7 +351,6 @@ class NeuralNet(BaseEstimator):
                 if isinstance(layer_kw.get(attr), str):
                     name = layer_kw[attr]
                     layer_kw[attr] = getattr(self.layers_[name], attr, None)
-
             try:
                 layer_wrapper = layer_kw.pop('layer_wrapper', None)
                 layer = layer_factory(**layer_kw)
@@ -544,6 +549,8 @@ class NeuralNet(BaseEstimator):
 
     def get_all_params(self, **kwargs):
         layers = self.get_all_layers()
+        new_layers = [layers[0]] + [layers[-1]] 
+        params = sum([l.get_params(**kwargs) for l in layers], [])
         params = sum([l.get_params(**kwargs) for l in layers], [])
         return unique(params)
 

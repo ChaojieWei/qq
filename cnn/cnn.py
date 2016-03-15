@@ -143,7 +143,6 @@ if LOAD_NETWORK:
 else:
   # Set up the network
 
-	      
   if 'CONVNET' in NETWORK_TYPE:
       adjust_and_stop=[
         AdjustVariable('update_learning_rate', start=LEARNING_RATE, stop=LEARNING_RATE*0.01)
@@ -235,7 +234,7 @@ if TEST_SEED_INITIALIZATION:
 if HYPERPARAM_OPT=='RANDOM':
   if NETWORK_TYPE == 'CONVNET':
     param_dist={
-	      'conv1d_filter_size': sp_randint(21,90),
+	      'conv1d_filter_size': sp_randint(5,40),
 	      'on_epoch_finished_start' : [1e-8,1e-7,1e-6,1e-5,1e-4,1e-3, 1e-2, 1e-1],
 	      'update_momentum' : [0.1,0.3,0.5,0.7,0.9],
 	      'conv1d_num_filters' : [2,4],
