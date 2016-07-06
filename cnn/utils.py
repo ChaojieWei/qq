@@ -156,7 +156,7 @@ def my_objective(layers,
         **get_output_kw
         )
     hidden_layers = layers[1:-1]
-    losses = loss_function(net_out, target) 
+    losses = loss_function(net_out, target) + (lamda1*regularize_layer_params(layers[-1], l2))
     if not deterministic:
       for i,h_layer in enumerate(hidden_layers):
 	zeros = numpy.zeros(i).astype(int).astype(str)                
